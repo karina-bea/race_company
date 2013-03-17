@@ -1,0 +1,113 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Run a Race!</title>
+
+  <link rel="stylesheet" href="css/normalize.css" />
+  
+  <link rel="stylesheet" href="css/foundation2.css" />
+  
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+
+  <script>
+function showUser(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","race2.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
+</head>
+<body>
+<nav class="top-bar">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            Race Company
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+</nav>
+
+    <div class="row">
+ 
+    <!-- Contact Details -->
+    <div class="large-9 columns">
+ 
+      <h3>Participate!</h3>
+      <p>We'd love for you to join our races. You can register by filling out the form below. If you have any questions contact us. We love getting email all day <em>all day</em>.</p>
+ 
+      <div>
+        <section class="section">
+          <h5 class="title"><a href="#">Sign Up For a Race!</a></h5>
+          <div>
+          
+
+<form action="insert2.php" method="post">
+
+First name: <input type="text" name="firstname" placeholder="Jane">
+Last name: <input type="text" name="lastname" placeholder="Smith">
+Email: <input type="text" name="email" placeholder="user@gmail.com">
+Address: <input type="text" name="address" placeholder="123 Fake St">
+City: <input type="text" name="city" placeholder="Reno">
+Zip: <input type="text" name="zip" placeholder="89509">
+Choose Race:
+<select name="race_num">
+  <option value="1">RACE 1</option>
+  <option value="2">RACE 2</option>
+  <option value="3">RACE 3</option>
+</select><br/><br/>
+Card Number: <input type="text" name="card_num" placeholder="123123123123">
+Expiration Date: <input type="text" name="ex_date" placeholder="08-31-2013">
+Security Code: <input type="text" name="s_code" placeholder="333">
+
+<input type="submit" class="radius button">
+</form>
+ </section>
+</div>
+</div>
+
+<div class="large-3 columns">
+      <h5>Current Participants</h5>
+      <!-- Clicking this placeholder fires the mapModal Reveal modal -->
+      <form>
+<select name="users" onchange="showUser(this.value)">
+<option value="">Select a race:</option>
+<option value="1">RACE 1</option>
+<option value="2">RACE 2</option>
+<option value="3">RACE 3</option>
+</select>
+</form>
+<br>
+<div id="txtHint"><b>Current participants will be listed here.</b></div>
+    <!-- End Sidebar -->
+  </div>
+
+</body>
+</html>
